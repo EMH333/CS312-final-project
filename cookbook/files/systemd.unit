@@ -1,0 +1,32 @@
+[Unit]
+Description=Minecraft
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+User=mcuser
+WorkingDirectory=/opt/minecraft
+ExecStart=java -Xmx1024M -Xms512M -jar /opt/minecraft/server.jar nogui
+
+# let's add some protection to the minecraft service
+
+# Users Database is not available from within the unit, only root and minecraft is available, everybody else is nobody
+PrivateUsers=true
+
+# Read only mapping of /usr /boot and /etc
+ProtectSystem=full
+
+# /home, /root and /run/user seem to be empty from within the unit. It is recommended to enable this setting for all long-running services (in particular network-facing ones).
+ProtectHome=true
+
+# Kernel IPC whitelisting
+ProtectKernelTunables=true
+
+# Make /usr, /boot, /etc and possibly some more folders read-only.
+ProtectControlGroups=true
+
+
+
+[Install]
+WantedBy=multi-user.target
