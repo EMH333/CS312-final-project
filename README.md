@@ -1,0 +1,62 @@
+
+Background: What will we do? How will we do it? 
+Requirements:
+    What will the user need to configure to run the pipeline?
+    What tools should be installed?
+    Are there any credentials or CLI required?
+    Should the user set environment variables or configure anything?
+Diagram of the major steps in the pipeline. 
+List of commands to run, with explanations.
+How to connect to the Minecraft server once it's running?
+
+# CS312 Final Project
+Set up a Minecraft Server on AWS
+
+## Background
+This repository uses Terraform and Chef to set up a Minecraft server on AWS. The Terraform script creates an EC2 instance, configures the security group rules, and installs Chef on the VM. The Chef script installs Java, Minecraft, and sets up the server.
+
+## Requirements
+If you are on Debian or Ubuntu, you can run the following commands to install the required tools:
+```
+sudo apt-get update
+sudo apt-get install -y terraform awscli
+```
+
+You also need to have an AWS account and have your credentials configured. You can find instructions on how to do that [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
+Terraform assumes that the credentials are in the default location (~/.aws/credentials) although you can use environment variables to specify the location as well.
+
+Finally, you need to generate an ssh key pair. You can do that with the following command:
+```
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa
+```
+
+Everything else is set up to configure the server for you automatically.
+
+
+#TODO add diagram of pipeline
+
+## How to run
+First, clone the repository:
+```
+git clone git@github.com:EMH333/CS312-final-project.git
+```
+
+Then, navigate to the directory:
+```
+cd CS312-final-project
+```
+
+Next, initialize Terraform:
+```
+terraform init
+```
+
+Finally, run the Terraform script:
+```
+terraform apply
+```
+
+You will be prompted to enter 'yes' so Terraform knows it is okay to proceed. After that, Terraform will create the EC2 instance and run the Chef script to install Minecraft. Once the script is finished, you can connect to the server using the public IP address of the EC2 instance. You can find the public IP address in the AWS console or by running the following command:
+```
+terraform show | grep public_ip
+```
