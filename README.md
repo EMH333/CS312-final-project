@@ -2,16 +2,22 @@
 Set up a Minecraft Server on AWS using Terraform and Chef
 
 ## Background
-This repository uses Terraform and Chef to set up a Minecraft server on AWS. The Terraform script creates an EC2 instance, configures the security group rules, and installs Chef on the VM. The Chef script installs Java, Minecraft, and sets up the server.
+This repository uses Terraform and Chef to set up a Minecraft server on AWS. The Terraform script creates an EC2 instance, configures the security group rules, and installs Chef on the VM. The Chef script installs Java, Minecraft, and sets up the server to start and stop automatically using Systemd.
 
 ## Requirements
+
+1. Terraform & AWS CLI
+2. AWS CLI credentials configured
+3. SSH key pair
+
+### Walk Through
 If you are on Debian or Ubuntu, you can run the following commands to install the required tools:
 ```
 sudo apt-get update
 sudo apt-get install -y terraform awscli
 ```
 
-You also need to have an AWS account and have your credentials configured. You can find instructions on how to do that [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
+**You also need to have an AWS account and have your credentials configured**. You can find instructions on how to do that [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
 Terraform assumes that the credentials are in the default location (~/.aws/credentials) although you can use environment variables to specify the location as well.
 
 Finally, you need to generate an ssh key pair. You can do that with the following command:
@@ -51,3 +57,10 @@ You will be prompted to enter 'yes' so Terraform knows it is okay to proceed. Af
 ```
 terraform output
 ```
+
+## Resources Used
+- [Terraform AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
+- [Chef Zero Docs](https://docs.chef.io/workstation/overview/)
+- [Minecraft Server Setup](https://www.minecraft.net/en-us/download/server)
+- [CINC](https://cinc.sh/start/chef/)
+- [Terraform Provisioner File](https://developer.hashicorp.com/terraform/language/resources/provisioners/file)
