@@ -33,7 +33,9 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa
 Everything else is set up to configure the server for you automatically.
 
 
-#TODO add diagram of pipeline
+## Diagram
+Below you can see the diagram of the pipeline. Since everything is handled by Terraform and Chef, there are only two steps requiring user input: Installing the required tools and configuring the AWS credentials. The rest of the steps are handled by Terraform and Chef.
+![Diagram](./diagram.svg)
 
 ## How to run
 First, clone the repository:
@@ -58,5 +60,5 @@ terraform apply
 
 You will be prompted to enter 'yes' so Terraform knows it is okay to proceed. After that, Terraform will create the EC2 instance and run the Chef script to install Minecraft. Once the script is finished, you can connect to the server using the public IP address of the EC2 instance. You can find the public IP address in the AWS console or by running the following command:
 ```
-terraform show | grep public_ip
+terraform output
 ```
