@@ -1,16 +1,5 @@
-
-Background: What will we do? How will we do it? 
-Requirements:
-    What will the user need to configure to run the pipeline?
-    What tools should be installed?
-    Are there any credentials or CLI required?
-    Should the user set environment variables or configure anything?
-Diagram of the major steps in the pipeline. 
-List of commands to run, with explanations.
-How to connect to the Minecraft server once it's running?
-
 # CS312 Final Project
-Set up a Minecraft Server on AWS
+Set up a Minecraft Server on AWS using Terraform and Chef
 
 ## Background
 This repository uses Terraform and Chef to set up a Minecraft server on AWS. The Terraform script creates an EC2 instance, configures the security group rules, and installs Chef on the VM. The Chef script installs Java, Minecraft, and sets up the server.
